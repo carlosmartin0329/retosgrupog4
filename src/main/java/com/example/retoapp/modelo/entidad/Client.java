@@ -2,7 +2,6 @@ package com.example.retoapp.modelo.entidad;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,10 +26,10 @@ public class Client implements Serializable {
     private int age;
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "client")
     @JsonIgnoreProperties("client")
-    private List<Message>messages;
-
+    private List<Message> messages;
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "client")
     @JsonIgnoreProperties("client")
-    private List<Reservation>reservations;
+    private List<Reservation> reservations;
+
 
 }

@@ -20,7 +20,8 @@ public class Score implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idScore;
     private String messageText;
-    private  int stars;
+    private int stars;
+
     @OneToOne
     @JsonIgnoreProperties("score")
     private Reservation reservation;

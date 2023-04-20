@@ -12,20 +12,17 @@ import java.util.List;
 @RestController
 @RequestMapping("api/Score")
 @CrossOrigin("*")
-
-
-
 public class ApiScore {
     @Autowired
     private ScoreService service;
 
     @GetMapping("/all")
     public List<Score> getAll(){
-    return service.getAll();
+        return service.getAll();
     }
     @PostMapping("/save")
-    public ResponseEntity save(@RequestBody Score score) {
+    public ResponseEntity save(@RequestBody Score score){
         service.save(score);
         return ResponseEntity.status(201).build();
     }
-        }
+}

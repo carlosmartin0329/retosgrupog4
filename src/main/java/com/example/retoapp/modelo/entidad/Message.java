@@ -7,22 +7,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Data
 @Entity
 @Table(name="message")
-public class Message {
+public class Message implements Serializable{
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMessage;
     private String messageText;
     @ManyToOne
     @JoinColumn(name = "carId")
     @JsonIgnoreProperties({"messages","reservations"})
     private Car car;
-
     @ManyToOne
     @JoinColumn(name = "clientId")
     @JsonIgnoreProperties({"messages","reservations"})

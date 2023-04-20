@@ -1,5 +1,6 @@
 package com.example.retoapp.modelo.entidad;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,16 +17,15 @@ import java.util.List;
 @Data
 @Entity
 @Table(name="gama")
-
-public class Gama  implements Serializable {
-
+public class Gama implements Serializable {
+   //primary key idGama
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long idGama;
    private String name;
    private String description;
-   @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "gama")
-   @JsonIgnoreProperties("gama")
-   private List<Car> Cars;
 
+   @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "gama")
+   @JsonIgnoreProperties("gama")
+   private List<Car> cars;
 }

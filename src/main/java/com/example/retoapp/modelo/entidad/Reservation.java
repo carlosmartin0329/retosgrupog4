@@ -10,7 +10,6 @@ import lombok.ToString;
 import java.io.Serializable;
 import java.util.Date;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -18,20 +17,20 @@ import java.util.Date;
 @Entity
 @Table(name="reservation")
 public class Reservation implements Serializable {
-    @Id
+    @Id//clave primaria (pk)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReservation;
-    private Date starDate;
+    private Date startDate;
     private Date devolutionDate;
-    private String status= "created";
-    @ManyToOne
-    @JoinColumn(name="carId")//llave foranea
-    @JsonIgnoreProperties("reservations")
-    private Car car;
+    private String status = "created";
 
     @ManyToOne
-    @JoinColumn(name = "clientId")//llave foranea
-    @JsonIgnoreProperties({"reservations","message"})
+    @JoinColumn(name="carId") //foreing key
+    @JsonIgnoreProperties("reservations")
+    private Car car;
+    @ManyToOne
+    @JoinColumn(name="clientId") //foreing key
+    @JsonIgnoreProperties({"reservations","messages"})
     private Client client;
 
     @OneToOne(cascade = {CascadeType.PERSIST},mappedBy = "reservation")
