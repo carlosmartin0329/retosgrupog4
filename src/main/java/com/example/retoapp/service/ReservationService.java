@@ -1,8 +1,12 @@
 package com.example.retoapp.service;
 
 
+import com.example.retoapp.api.custom.CountClient;
+import com.example.retoapp.api.custom.StatusAmount;
+import com.example.retoapp.modelo.entidad.Client;
 import com.example.retoapp.modelo.entidad.Reservation;
 import com.example.retoapp.modelo.repositorio.ReservationRepository;
+import jdk.jshell.Snippet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,5 +66,23 @@ public class ReservationService {
         else{
             return new ArrayList<>();
         }
+    }
+    public StatusAmount getReservationByStatusReport(){
+        List<Reservation> completed = repository.findAllByStatus("completed");
+        List<Reservation> cancelled = repository.findAllByStatus("cancelled");
+        // return  new StatusAmount(completed.size(), cancelled.size());//esta es una manera
+        // con builder
+        return StatusAmount.builder()
+                .cancelled(cancelled.size())
+                .completed(completed.size())
+                .build();
+    }
+    public List<CountClient> getTopClients(){
+        List<CountClient> res = new ArrayList<>();
+        List<Object[]> report = repository.countTotalReservationByClient();
+        for(int i=0;i<report.size();i++){
+            res.add(new CountClient((Long)report.get(i)[1],(Client)report.get(i)[0]));
+        }
+        return res;
     }
 }

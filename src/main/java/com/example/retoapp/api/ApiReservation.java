@@ -1,5 +1,7 @@
 package com.example.retoapp.api;
 
+import com.example.retoapp.api.custom.CountClient;
+import com.example.retoapp.api.custom.StatusAmount;
 import com.example.retoapp.modelo.entidad.Reservation;
 import com.example.retoapp.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,14 @@ public class ApiReservation {
     public List<Reservation>getReservationReportDates(@PathVariable String dateOne,
                                                       @PathVariable String dateTwo){
         return service.getReservationPeriod(dateOne,dateTwo);
+    }
+    @GetMapping("/report-status")
+    public StatusAmount getReservationStatusReport(){
+        return service.getReservationByStatusReport();
+    }
+    @GetMapping("/report-clients")
+    public List<CountClient> getReservationReportClient(){
+        return service.getTopClients();
     }
 }
 
